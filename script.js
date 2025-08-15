@@ -1,18 +1,23 @@
+AFRAME.registerComponent('scaleOnHover',{
 
-var box = documet.querySelector("a-box");
+	schema:{
 
-box.addEventListener('mouseenter',()=>{
 
-box.setAttribute('scale',{x:2,y:2,z:2});
+	to:{default: '2.5 2.5 2.5',type:'vec3'}
+	},
+	init:function(){
 
+
+var data = this.data;
+var el = this.el;
+this.el.addEventListener('mouseenter',function(){
+
+el.object3D.scale.copy(data.to);
 });
 
-box.addEventListener('mouseleave',()=>{
+	}
 
-box.setAttribute('scale',{x:2,y:2,z:2});
 
 });
-
-
 
 

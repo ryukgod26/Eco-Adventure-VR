@@ -11,7 +11,21 @@
 <script src="script.js"></script>
   </head>
   <body>
+<script>
+  AFRAME.registerComponent('scale-on-mouseenter', {
+    schema: {
+      to: {default: '2.5 2.5 2.5', type: 'vec3'}
+    },
 
+    init: function () {
+      var data = this.data;
+      var el = this.el;
+      this.el.addEventListener('mouseenter', function () {
+        el.object3D.scale.copy(data.to);
+      });
+    }
+  });
+</script>
 
 	  <a-scene>
 <a-entity id="player-rig" movement-controls="controls: touch; speed: 0.2;">
@@ -32,7 +46,7 @@
 </a-assets>
 <a-light type="ambient" color="#445451"></a-light>
   <a-light type="point" intensity="2" position="2 4 4"></a-light>
-	  <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 45" scale="2 4 2" animation="property: object3D.position.y; to: 2.9; dir: alternate; dur: 2000; loop: true">
+	  <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 45" scale="2 4 2" animation="property: object3D.position.y; to: 2.9; dir: alternate; dur: 2000; loop: true" scale-on-mouseenter>
   </a-box>
     <a-sky src="#skyTexture" ></a-sky>
   <a-plane src="#groundTexture" height="100" width="100" rotation="-90 0 0">
