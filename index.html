@@ -46,7 +46,9 @@
 </a-assets>
 <a-light type="ambient" color="#445451"></a-light>
   <a-light type="point" intensity="2" position="2 4 4"></a-light>
-	  <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 45" scale="2 4 2" animation="property: object3D.position.y; to: 2.9; dir: alternate; dur: 2000; loop: true" scale-on-mouseenter>
+	  <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 45"  animation="property: object3D.position.y; to: 2.9; dir: alternate; dur: 2000; loop: true" scale-on-mouseenter
+animation_position:"property: Object3d.position.y to: 2.2  dir:alternative dur:200 loop:true" animation_scale
+		  >
   </a-box>
     <a-sky src="#skyTexture" ></a-sky>
   <a-plane src="#groundTexture" height="100" width="100" rotation="-90 0 0">
