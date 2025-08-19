@@ -1,66 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello, WebVR! • A-Frame</title>
-    <meta name="description" content="Hello, WebVR! • A-Frame">
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component@1.3.x/dist/aframe-environment-component.min.js"></script>
- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
-<script src="https://unpkg.com/super-hands@3.0.3/dist/super-hands.min.js"></script>
-<script src="script.js"></script>
-  </head>
-  <body>
-<script>
-  AFRAME.registerComponent('scale-on-mouseenter', {
-    schema: {
-      to: {default: '2.5 2.5 2.5', type: 'vec3'}
-    },
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco Adventure VR</title>
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js" ></script>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
+</head>
+<body>
+  <a-scene>
+ <a-assets>
+    <a-asset-item id="cityModel" src="models/moss_01_4k.glb"></a-asset-item>
+  </a-assets>
+    <a-box event-set__enter="_event:mouseenter; color:#FF0000 " log="message:box is created" position="2 2 2" color="#FFF" 
+           event-set__leave="_event: mouseleave; color: #4CC3D9"></a-box>
+     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"
+             event-set__down="_event: mousedown; material.wireframe: true"
+             event-set__up="_event: mouseup; material.wireframe: false"
+             event-set__leave="_event: mouseleave; material.wireframe: false"></a-plane>
+    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+                event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
+                event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
+      <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
+              geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
+    </a-cylinder>
+    <a-sphere change-color-on-hover position="-2 0 -4" color="#1F1F1F" ></a-sphere>
+   <a-entity gltf-model="#cityModel" modify-materials></a-entity>
+    <a-sky color="#000099" ></a-sky>
 
-    init: function () {
-      var data = this.data;
-      var el = this.el;
-      this.el.addEventListener('mouseenter', function () {
-        el.object3D.scale.copy(data.to);
-      });
-    }
-  });
-</script>
-
-	  <a-scene>
-<a-entity id="player-rig" movement-controls="controls: touch; speed: 0.2;">
-    <a-entity camera
-              position="0 1.6 0"
-              look-controls="pointerLockEnabled: false; maxPitch:90;">
-              <a-cursor></a-cursor>
-    </a-entity>
-</a-entity>
-
-
-<a-assets>
-<img id="skyTexture"      src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
-
-<img id="groundTexture" src= "https://live.staticflickr.com/4458 /37343472710_ab0988636a_b.jpg">
-
-<img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
-</a-assets>
-<a-light type="ambient" color="#445451"></a-light>
-  <a-light type="point" intensity="2" position="2 4 4"></a-light>
-	  <a-box src="#boxTexture" position="0 2 -5" rotation="0 45 45"  animation="property: object3D.position.y; to: 2.9; dir: alternate; dur: 2000; loop: true" scale-on-mouseenter
-animation_position:"property: Object3d.position.y to: 2.2  dir:alternative dur:200 loop:true" animation_scale
-		  >
-  </a-box>
-    <a-sky src="#skyTexture" ></a-sky>
-  <a-plane src="#groundTexture" height="100" width="100" rotation="-90 0 0">
-
-
-</a-plane>
-<a-camera>
-    <a-cursor color="#FAFAFA"></a-cursor>
-  </a-camera>
-  <!--  <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
-	  </a-scene>
-
+    <a-camera>
+      <a-cursor></a-cursor>
+    </a-camera>
+  </a-scene>
 </body>
 </html>
-
