@@ -9,23 +9,29 @@
   <script src="https://unpkg.com/@c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>  
 <script src="https://unpkg.com/@c-frame/aframe-physics-system@4.2.2/dist/aframe-physics-system.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
+
   <script src="script.js"></script>
 </head>
 <body>
   <a-scene loading-screen="dotsColor: red; backgroundColor: black" physics>
  <a-assets>
-    <a-asset-item id="cityModel" src="models/moss_01_4k.glb"></a-asset-item>
+    <a-asset-item id="plants" src="models/moss_01_4k.glb"></a-asset-item>
     <a-asset-item id="palm" src="models/palm.fbx"></a-asset-item>
     <a-asset-item id="VP" src="models/VP.glb"></a-asset-item>
     <a-asset-item id="rock" src="models/rock_obj/Rock_01.obj"></a-asset-item>
     <a-asset-item id="rock-mtl" src="models/rock_obj/Rock_01.mtl"></a-asset-item>
+    <a-assest-item id="Roses" src="models/Roses.glb"></a-assest-item>
+    <a-assest-item id="sunflower" src="models/Sunflower.glb"></a-assest-item>
+    <a-assest-item id="red_flower" src="models/Simple red flower.glb"></a-assest-item>
+    <a-assest-item id="flower_pot" src="models/Flower Pot.glb"></a-assest-item>
+    <img id="groundTexture" src="images/ground.jpg">
     <!-- Audio assets -->
     <!-- <audio id="ambient-audio" src="https://cdn.freesound.org/previews/510/510811_10242712-lq.mp3"></audio>
     <audio id="extinguish-sfx" src="https://cdn.freesound.org/previews/415/415209_5121236-lq.mp3"></audio> -->
   </a-assets>
     <a-box dynamic-body event-set__enter="_event:mouseenter; color:#FF0000 " log="message:box is created" position="2 2 2" color="#FFF" 
            event-set__leave="_event: mouseleave; color: #4CC3D9"></a-box>
-     <a-plane static-body position="0 -2 -4" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"
+     <a-plane static-body position="0 -2 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" repeat="20 20" src="#groundTexture"
              event-set__down="_event: mousedown; material.wireframe: true"
              event-set__up="_event: mouseup; material.wireframe: false"
              event-set__leave="_event: mouseleave; material.wireframe: false"></a-plane>
@@ -41,8 +47,8 @@
 <!-- <a-sound src="src: url(sounds/test.mp3)" volume="2" autoplay="true" position="0 2 5"></a-sound> -->
 
     <a-entity gltf-model="#VP"></a-entity>
-   <a-entity gltf-model="#cityModel" modify-materials></a-entity>
-  <a-sky color="#000000" ></a-sky>
+   <a-gltf-model src="#plants" scale="3 3 3" position="0 -3 -3"></a-gltf-model>
+  <a-sky src="#sky" color="#000000" ></a-sky>
 
     <a-entity id="campfire" class="fire" position="1 0 -3">
       <a-entity particle-system="preset: dust; color: #FF4500, #FFA500; particleCount: 200; size: 0.18" position="0 0.4 0"></a-entity>
@@ -69,5 +75,10 @@
 </a-entity>
 
   </a-scene>
+  <h4>Credits:Roses by Christopher F [CC-BY] via Poly Pizza
+    Flower Pot by Zsky [CC-BY] via Poly Pizza
+    Simple red flower by Karlien [CC-BY] via Poly Pizza
+    Sunflower by jeremy [CC-BY] via Poly Pizza
+  </h4>
 </body>
 </html>
