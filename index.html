@@ -5,33 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eco Adventure VR</title>
   <script src="https://aframe.io/releases/1.7.0/aframe.min.js" ></script>
-  <script src="script.js"></script>
+  
+  <script src="https://unpkg.com/@c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>  
+<script src="https://unpkg.com/@c-frame/aframe-physics-system@4.2.2/dist/aframe-physics-system.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
+  <script src="script.js"></script>
 </head>
 <body>
-  <a-scene>
+  <a-scene loading-screen="dotsColor: red; backgroundColor: black" physics>
  <a-assets>
     <a-asset-item id="cityModel" src="models/moss_01_4k.glb"></a-asset-item>
+    <a-asset-item id="palm" src="models/palm.fbx"></a-asset-item>
+    <a-asset-item id="VP" src="models/VP.glb"></a-asset-item>
+    <a-asset-item id="rock" src="models/rock_obj/Rock_01.obj"></a-asset-item>
+    <a-asset-item id="rock-mtl" src="models/rock_obj/Rock_01.mtl"></a-asset-item>
+    <!-- Audio assets -->
+    <!-- <audio id="ambient-audio" src="https://cdn.freesound.org/previews/510/510811_10242712-lq.mp3"></audio>
+    <audio id="extinguish-sfx" src="https://cdn.freesound.org/previews/415/415209_5121236-lq.mp3"></audio> -->
   </a-assets>
-    <a-box event-set__enter="_event:mouseenter; color:#FF0000 " log="message:box is created" position="2 2 2" color="#FFF" 
+    <a-box dynamic-body event-set__enter="_event:mouseenter; color:#FF0000 " log="message:box is created" position="2 2 2" color="#FFF" 
            event-set__leave="_event: mouseleave; color: #4CC3D9"></a-box>
-     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"
+     <a-plane static-body position="0 -2 -4" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"
              event-set__down="_event: mousedown; material.wireframe: true"
              event-set__up="_event: mouseup; material.wireframe: false"
              event-set__leave="_event: mouseleave; material.wireframe: false"></a-plane>
-    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+    <a-cylinder dynamic-body position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
                 event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
                 event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
       <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
               geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
     </a-cylinder>
-    <a-sphere change-color-on-hover position="-2 0 -4" color="#1F1F1F" ></a-sphere>
-   <a-entity gltf-model="#cityModel" modify-materials></a-entity>
-    <a-sky color="#000099" ></a-sky>
+  <a-sphere dynamic-body change-color-on-hover position="-2 0 -4" color="#1F1F1F" ></a-sphere>
+<!-- <a-obj-model src="#rock" mtl="#rock-mtl" scale="0.001 0.001 0.001" ></a-obj-model> -->
+<a-entity gltf-model="#palm" ></a-entity>
+<!-- <a-sound src="src: url(sounds/test.mp3)" volume="2" autoplay="true" position="0 2 5"></a-sound> -->
 
-    <a-camera>
-      <a-cursor></a-cursor>
+    <a-entity gltf-model="#VP"></a-entity>
+   <a-entity gltf-model="#cityModel" modify-materials></a-entity>
+  <a-sky color="#000000" ></a-sky>
+
+    <a-entity id="campfire" class="fire" position="1 0 -3">
+      <a-entity particle-system="preset: dust; color: #FF4500, #FFA500; particleCount: 200; size: 0.18" position="0 0.4 0"></a-entity>
+    </a-entity>
+
+    <a-cylinder id="waterJet" class="clickable" position="1 0.5 -1.5" radius="0.1" height="0.4" color="#00AFFF" water-jet></a-cylinder>
+
+    <!-- Educational popup (hidden until triggered) -->
+    <a-entity id="popup" visible="false" position="0 1.6 -1.5">
+      <a-plane width="1.6" height="0.7" color="#111" opacity="0.95"></a-plane>
+      <a-entity text="value: Species: Golden Tamarin\nStatus: Endangered\nClick to close.; color: #FFF; align: center; width: 1.4" position="0 0 0.01"></a-entity>
+    </a-entity>
+
+    <!-- Sounds -->
+    <a-entity id="ambientSound" sound="src: #ambient-audio; autoplay: true; loop: true; volume: 0.4"></a-entity>
+    <a-entity id="sfxExtinguish" sound="src: #extinguish-sfx; autoplay: false; volume: 1"></a-entity>
+<a-entity id="player">
+<a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+<a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"></a-entity>  
+    <a-camera wasd-controls="fly:true">
+      <!-- Cursor configured to click objects with class 'clickable' -->
+      <a-entity cursor="fuse: false; rayOrigin: mouse" raycaster="objects: .clickable" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.015" material="color: #CCC; shader: flat" position="0 0 -1"></a-entity>
     </a-camera>
+</a-entity>
+
   </a-scene>
 </body>
 </html>
