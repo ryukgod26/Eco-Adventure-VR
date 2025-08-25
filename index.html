@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eco Adventure VR</title>
   <script src="https://aframe.io/releases/1.7.0/aframe.min.js" ></script>
-  
+  <script src="https://cdn.jsdelivr.net/gh/supermedium/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
   <script src="https://unpkg.com/@c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>  
 <script src="https://unpkg.com/@c-frame/aframe-physics-system@4.2.2/dist/aframe-physics-system.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
@@ -13,13 +13,11 @@
   <script src="script.js"></script>
 </head>
 <body>
-  <a-scene loading-screen="dotsColor: red; backgroundColor: black" physics>
+  <a-scene loading-screen="dotsColor: red; backgroundColor: black">
  <a-assets>
     <a-asset-item id="plants" src="models/moss_01_4k.glb"></a-asset-item>
     <a-asset-item id="palm" src="models/palm.fbx"></a-asset-item>
     <a-asset-item id="VP" src="models/VP.glb"></a-asset-item>
-    <a-asset-item id="rock" src="models/rock_obj/Rock_01.obj"></a-asset-item>
-    <a-asset-item id="rock-mtl" src="models/rock_obj/Rock_01.mtl"></a-asset-item>
     <a-assest-item id="Roses" src="models/Roses.glb"></a-assest-item>
     <a-assest-item id="sunflower" src="models/Sunflower.glb"></a-assest-item>
     <a-assest-item id="red_flower" src="models/Simple red flower.glb"></a-assest-item>
@@ -29,26 +27,26 @@
     <!-- <audio id="ambient-audio" src="https://cdn.freesound.org/previews/510/510811_10242712-lq.mp3"></audio>
     <audio id="extinguish-sfx" src="https://cdn.freesound.org/previews/415/415209_5121236-lq.mp3"></audio> -->
   </a-assets>
-    <a-box dynamic-body event-set__enter="_event:mouseenter; color:#FF0000 " log="message:box is created" position="2 2 2" color="#FFF" 
+    <a-box  event-set__enter="_event:mouseenter; color:#FF0000 " log="message:box is created" position="2 2 2" color="#FFF" 
            event-set__leave="_event: mouseleave; color: #4CC3D9"></a-box>
-     <a-plane static-body position="0 -2 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" repeat="20 20" src="#groundTexture"
+     <a-plane  position="0 -2 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" repeat="20 20" src="#groundTexture"
              event-set__down="_event: mousedown; material.wireframe: true"
              event-set__up="_event: mouseup; material.wireframe: false"
              event-set__leave="_event: mouseleave; material.wireframe: false"></a-plane>
-    <a-cylinder dynamic-body position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
                 event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
                 event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
       <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
               geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
     </a-cylinder>
-  <a-sphere dynamic-body change-color-on-hover position="-2 0 -4" color="#1F1F1F" ></a-sphere>
+  <a-sphere change-color-on-hover position="-2 0 -4" color="#1F1F1F" ></a-sphere>
 <!-- <a-obj-model src="#rock" mtl="#rock-mtl" scale="0.001 0.001 0.001" ></a-obj-model> -->
 <a-entity gltf-model="#palm" ></a-entity>
 <!-- <a-sound src="src: url(sounds/test.mp3)" volume="2" autoplay="true" position="0 2 5"></a-sound> -->
 
     <a-entity gltf-model="#VP"></a-entity>
    <a-gltf-model src="#plants" scale="3 3 3" position="0 -3 -3"></a-gltf-model>
-  <a-sky src="#sky" color="#000000" ></a-sky>
+    <a-entity environment="preset: forest; groundColor: #445; skyColor: #88c;"></a-entity>
 
     <a-entity id="campfire" class="fire" position="1 0 -3">
       <a-entity particle-system="preset: dust; color: #FF4500, #FFA500; particleCount: 200; size: 0.18" position="0 0.4 0"></a-entity>
