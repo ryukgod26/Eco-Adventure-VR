@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const firePuzzleHint = document.getElementById("fire-puzzle-hint");
   const riverPuzzleHint = document.getElementById("river-puzzle-hint");
 
+  const sceneUi = document.getElementById('scene-ui');
   const fireEntity = document.querySelector("#fire");
   const firePitEntity = document.querySelector('a-gltf-model[src="#firePit"]');
   const riverPuzzleEntity = document.querySelector("#riverPuzzle");
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     hintText.style.display = "none";
     firePuzzleHint.style.display = "none";
     riverPuzzleHint.style.display = "none";
+    sceneUi.style.display = 'none';
   });
 
   hintBtn.addEventListener("click", function () {

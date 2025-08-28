@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eco Adventure VR</title>
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js" ></script>
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/gh/supermedium/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
   <script src="https://unpkg.com/@c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>  
 <script src="https://unpkg.com/@c-frame/aframe-physics-system@4.2.2/dist/aframe-physics-system.min.js"></script>
@@ -124,15 +124,11 @@
 
 
 
-<a-entity flower="text:- The plant is tall and slender, with a single stalk rising vertically.
-- At the top, there's a flat, circular object—possibly a surreal interpretation of a flower head or a symbolic element.
-- The leaves or petals are brown and white, arranged in a layered fashion, resembling bracts or sepals more than traditional petals.
-."
->
-  <a-gltf-model rotation="0 -90 0"  scale="2 2 2" class="clickable" src="#flower_pot"  position="5 2 -3" id="flower_potModel" 
-   event-set__enter="_event: mouseenter; _target: #flower_pot_text; visible: true"
-  event-set__leave="_event: mouseleave; _target: #flower_pot_text; visible: false" 
- >
+<a-entity flower="text:The plant is tall and slender, with a single stalk rising vertically.
+.">
+  <a-gltf-model rotation="0 -90 0" scale="2 2 2" class="clickable" src="#flower_pot" position="5 2 -3" id="flower_potModel"
+    event-set__enter="_event: mouseenter; _target: #flower_pot_text; visible: true"
+    event-set__leave="_event: mouseleave; _target: #flower_pot_text; visible: false">
     <a-text rotation="0 90 0"
     id="flower_pot_text" value="SunFlower (Right CLick to know more)." align="center" color="#FFF" visible="false" position="0 11 0.55" scale="2 2 2"
               geometry="primitive: plane; width: 3.0" material="color: #333"></a-text>
